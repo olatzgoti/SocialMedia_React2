@@ -10,10 +10,10 @@ const Post = ()=> {
             <div key={post._id} className="post">
                 <h2>Post nº {index}</h2>
                 <p>{post.content}</p>
-            {/*  <img
-                src={`http://localhost:3000/${post.post_img}`}
-                width="350px"
-            /> */}
+                {/*  <img
+                    src={`http://localhost:3000/${post.post_img}`}
+                    width="350px"
+                /> */}
                 <Link to={`/post/${post._id}`}>
                 <h2>{post.title}</h2>
                 </Link>
