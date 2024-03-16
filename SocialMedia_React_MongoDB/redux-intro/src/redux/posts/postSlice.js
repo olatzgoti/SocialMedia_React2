@@ -17,7 +17,8 @@ export const getAll = createAsyncThunk("posts/getAll", async () => {
 
 export const getById = createAsyncThunk("posts/getById", async (id) => {
   try {
-    return await postService.getById(id);
+    const postservice = await postService.getById(id);
+    return postservice
   } catch (error) {
     console.log(error);
   }
@@ -46,15 +47,15 @@ export const postSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAll.fulfilled, (state, action) => {
       state.posts = action.payload;
-    });
+    })
 
-    builder.addCase(getAll.pending, (state) => {
+    .addCase(getAll.pending, (state) => {
       state.isLoading = true;
-    });
-    builder.addCase(getById.fulfilled, (state, action) => {
+    })
+    .addCase(getById.fulfilled, (state, action) => {
       state.post = action.payload;
-    });
-    builder.addCase(getPostByName.fulfilled, (state, action) => {
+    })
+    .addCase(getPostByName.fulfilled, (state, action) => {
       state.posts = action.payload;
     });
   },

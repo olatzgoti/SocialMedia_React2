@@ -7,5 +7,6 @@ export const store = configureStore({
   {
     auth,
     posts,
+    
   },
 });
