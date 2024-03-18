@@ -1,27 +1,33 @@
 import Post from '../Post/Post/Post'
+import CreatePost from '../Post/CreatePost/CreatePost'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAll, reset } from '../../redux/posts/postSlice'
 
-const Posts = () =>{
-    const { isLoading } = useSelector((state)=>state.posts)
+const Posts = () => {
+    const { isLoading } = useSelector((state) => state.posts)
 
     const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getAll())
         dispatch(reset())
     }, [])
 
-return (
-    <div>
-       <h1>Posts</h1>
-        {isLoading ?
-        'Cargando'
-        :    
-        <Post/>
-        }
-    </div>
+    return (
+        <div>
+
+
+            <h1>Posts</h1>
+            {isLoading ?
+                'Cargando'
+                :
+                <>
+                    <CreatePost />
+                    <Post />
+                </>
+            }
+        </div>
     )
 }
 

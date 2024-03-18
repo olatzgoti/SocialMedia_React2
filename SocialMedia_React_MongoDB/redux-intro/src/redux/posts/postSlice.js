@@ -3,6 +3,7 @@ import postService from "./postService";
 
 const initialState = {
   posts: [],
+  userPosts:[],
   isLoading: false,
   post: {},
 };
@@ -14,6 +15,21 @@ export const getAll = createAsyncThunk("posts/getAll", async () => {
     console.error(error);
   }
 });
+e
+
+
+
+export const create = createAsyncThunk('post/create', async(userId)=>{
+  try {  
+    return await postService.create(userId)
+  
+  } 
+  catch (error) {
+    console.log(error)
+  }
+
+})
+
 
 export const getById = createAsyncThunk("posts/getById", async (id) => {
   try {
@@ -46,18 +62,25 @@ export const postSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(getAll.fulfilled, (state, action) => {
-      state.posts = action.payload;
+      state.posts = action.payload
     })
 
     .addCase(getAll.pending, (state) => {
-      state.isLoading = true;
+      state.isLoading = true
+    })
+
+    .addCase(create.fulfilled, (state, action)=>{
+      state.posts.push(action.payload)
+    })
+    .addCase(create.pending, (state)=>{
+      state.isLoading = true
     })
     .addCase(getById.fulfilled, (state, action) => {
       state.post = action.payload;
     })
     .addCase(getPostByName.fulfilled, (state, action) => {
       state.posts = action.payload;
-    });
+    })
   },
 });
 

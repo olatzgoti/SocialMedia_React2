@@ -12,6 +12,21 @@ const getAll = async () => {
   }
 };
 
+
+const create = async(userId) =>{
+
+  try {
+    const res = await axios.post(`${API_URL}/create`, userId)
+    return res.data
+  } 
+    
+  catch (error) {
+    
+    res.send(error)
+     
+  } 
+}
+
 const getById = async(id)=>{
   try {
     const res = await axios.get(`${API_URL}/getById/id/${id}`)
@@ -35,7 +50,8 @@ const getPostByName = async(postTitle) =>{
 const postService = {
     getAll, 
     getById,
-    getPostByName
+    getPostByName,
+    create
 
 }
 export default postService

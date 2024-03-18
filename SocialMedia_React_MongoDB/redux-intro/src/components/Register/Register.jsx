@@ -1,38 +1,36 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { register, reset } from '../../redux/auth/authSlice'
-import './Register.scss'
-//import { notification } from 'antd'
-import { notification } from 'antd'
+//import './Register.scss'
+import { notification, Input } from 'antd'
 
 const Register = () => {
 
 
     const dispatch = useDispatch()
-    const { isSuccess, message, isError} = useSelector((state)=>state.auth)
+    const { isSuccess, message, isError } = useSelector((state) => state.auth)
 
-    useEffect(()=>{
-        if(isSuccess)
-        {
+    useEffect(() => {
+        if (isSuccess) {
             notification.success({
-                message:'Success',
+                message: 'Success',
                 description: message,
             })
         }
-        if(isError){
+        if (isError) {
             notification.error({
-                message:'Error', 
+                message: 'Error',
                 description: message,
             })
-    }    
+        }
         dispatch(reset())
     }, [isSuccess, isError, message])
 
 
-    
-    const [formData, setFormData] = useState({ name:'', email:'', password:'', age:'' })
 
-    
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', age: '' })
+
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -42,23 +40,23 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('formData',formData)
+        console.log('formData', formData)
         dispatch(register(formData))
     }
-    
+
     const { name, email, password, age } = formData
     return (
-        
-    <form onSubmit={handleSubmit} className="form">
 
-     <div className='fields'>
-            <input type="text" name="name" value={name} placeholder="name required" onChange={handleChange} />
-            <input type="email" name="email" value={email} placeholder="email required" onChange={handleChange}/>
-            <input type="password" name="password" value={password} placeholder="password required" onChange={handleChange}/>
-            <input type="text" name="age" value={age} placeholder="age required" onChange={handleChange}/>
-        <button type="submit">Register</button>
-     </div>
-    </form>
+        <form onSubmit={handleSubmit} className="form">
+
+            <div className='fields'>
+                <Input type="text" name="name" value={name} placeholder="name required" onChange={handleChange} />
+                <Input type="email" name="email" value={email} placeholder="email required" onChange={handleChange} />
+                <Input type="password" name="password" value={password} placeholder="password required" onChange={handleChange} />
+                <Input type="text" name="age" value={age} placeholder="age required" onChange={handleChange} />
+                <button type="submit">Register</button>
+            </div>
+        </form>
     )
 }
 
