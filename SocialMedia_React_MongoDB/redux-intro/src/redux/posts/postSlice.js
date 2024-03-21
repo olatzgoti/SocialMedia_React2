@@ -15,21 +15,34 @@ export const getAll = createAsyncThunk("posts/getAll", async () => {
     console.error(error);
   }
 });
-e
 
+export const updatePost = createAsyncThunk('posts/updatePost', async(postData) => { 
+  try {
+   console.log(postData)
+    return await postService.updatePost(postData)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 
-
-export const create = createAsyncThunk('post/create', async(userId)=>{
+export const create = createAsyncThunk('post/create', async(postData)=>{
   try {  
-    return await postService.create(userId)
-  
+    return await postService.create(postData)
   } 
   catch (error) {
     console.log(error)
   }
-
 })
 
+export const deletePost = createAsyncThunk('post/deletePost', async(id) =>{
+try {
+    return await postService.deletePost(id)
+
+} catch (error) {
+  console.log(error)
+}
+})
 
 export const getById = createAsyncThunk("posts/getById", async (id) => {
   try {
@@ -40,6 +53,15 @@ export const getById = createAsyncThunk("posts/getById", async (id) => {
   }
 });
 
+export const likePost = createAsyncThunk('post/like', async() => {
+  try {
+    return await postService.likePost()
+
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 export const getPostByName = createAsyncThunk(
   "posts/getPostByName",
   async (postName) => {
@@ -49,8 +71,7 @@ export const getPostByName = createAsyncThunk(
       console.error(error);
     }
   }
-);
-
+)
 export const postSlice = createSlice({
   name: "posts",
   initialState,
@@ -69,12 +90,27 @@ export const postSlice = createSlice({
       state.isLoading = true
     })
 
-    .addCase(create.fulfilled, (state, action)=>{
+    .addCase(create.fulfilled, (state, action) => {
       state.posts.push(action.payload)
     })
     .addCase(create.pending, (state)=>{
       state.isLoading = true
     })
+    .addCase(updatePost.fulfilled, (state, action) => {
+      state.post = action.payload.post
+      state.token = action.payload.token;
+    })
+    .addCase(updatePost.pending, (state) => {
+      state.isLoading = true
+    })
+    .addCase(deletePost.fulfilled, (state, action) => {
+      state.post = action.payload.post
+      state.token = action.payload.token;
+    })
+    .addCase(deletePost.pending, (state) => {
+      state.isLoading = true
+    })
+
     .addCase(getById.fulfilled, (state, action) => {
       state.post = action.payload;
     })

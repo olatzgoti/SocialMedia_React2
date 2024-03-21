@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { login, reset } from '../../redux/auth/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Input } from 'antd'
+import { Input, notification } from 'antd'
 //import './Login.scss'
 //import Profile from '../Profile/Profile'
 

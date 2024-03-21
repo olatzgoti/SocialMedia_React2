@@ -18,13 +18,15 @@ const Posts = () => {
         <div>
 
 
-            <h1>Posts</h1>
+            <h1>PostList</h1>
             {isLoading ?
                 'Cargando'
                 :
                 <>
                     <CreatePost />
                     <Post />
+
+
                 </>
             }
         </div>

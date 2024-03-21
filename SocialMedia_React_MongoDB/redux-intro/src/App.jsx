@@ -8,6 +8,7 @@ import Profile from './components/Profile/Profile'
 import PostDetail from './components/Post/PostDetail/PostDetail'
 import Search from './components/Search/Search'
 import PrivateZone from './guards/PrivateZone'
+import UpdatePost from './components/Post/UpdatePost/UpdatePost'
 //import AdminZone from './guards/AdminZone'
 import NotFound from './components/NotFound/NotFound'
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/updatePost' element={<UpdatePost/>}/>
           {/* {//} <Route path="/profile" element={<Profile />}/>//} */}
           {/* //<Route path="/admin" element={<AdminZone><Admin /></AdminZone>} /> */}
           <Route path="/post/:id" element={<PostDetail />} />

@@ -13,19 +13,53 @@ const getAll = async () => {
 };
 
 
-const create = async(userId) =>{
+const create = async(postData) =>{
 
   try {
-    const res = await axios.post(`${API_URL}/create`, userId)
+    const token = JSON.parse(localStorage.getItem('token'))
+    const res = await axios.post(`${API_URL}/create`, postData, {
+    headers: {
+      authorization: token,
+    },
+  })
     return res.data
   } 
     
   catch (error) {
-    
     res.send(error)
-     
   } 
 }
+
+const updatePost = async(postData) => {
+  try {
+ //   console.log(postData)
+    const token = JSON.parse(localStorage.getItem('token'))
+    const { id } = postData
+    const res = await axios.put(`${API_URL}/update/id/${id}`, postData, {
+      headers: {
+        authorization: token,
+
+      },
+    })  
+    return res.data
+  } 
+  catch (error) {
+    res.send(error)
+  }
+}
+
+const deletePost = async(id) => {
+try {
+  const token = JSON.parse(localStorage.getItem('token'))
+  const res = await axios.delete(`${API_URL}/delete/id/${id}`, { headers: { authorization: token, },})
+  return res.data
+// RES IS NOT DEFINED??
+} catch (error) {
+  res.send(error)  
+}
+
+}
+
 
 const getById = async(id)=>{
   try {
@@ -47,11 +81,23 @@ const getPostByName = async(postTitle) =>{
   }
 }
 
+const likePost = async() => {
+  try {
+    const like = await axios.put(`${API_URL}/like/id/${id}`)
+    return res
+  }  
+  catch (error) {
+    console.log(error)
+  }
+}
+
 const postService = {
     getAll, 
     getById,
     getPostByName,
-    create
-
+    create,
+    updatePost,
+    deletePost,
+    likePost
 }
 export default postService

@@ -39,8 +39,9 @@ const CreatePost = () => {
     [isSuccess, isError, message])
     */
     const [formData, setFormData] = useState(initialState)
-    const { userId, title, content } = formData
+    const { title, content } = formData
 
+    const token = JSON.parse(localStorage.getItem('token'))
     const navigate = useNavigate()
 
 
@@ -52,19 +53,22 @@ const CreatePost = () => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault(),
-            dispatch(create(formData))
+        e.preventDefault()
+        dispatch(create({ formData, token }))
+        console.log(dispatch(create({ formData, token })))
         setFormData(initialState)
-        console.log('hola?')
         navigate('/')
     }
 
-
+   /* const user = JSON.parse(localStorage.getItem('user'))
+    console.log({ user, message: 'crear posr' })
+    console.log(user._id)*/
+    
     return (
         <div>
 
             <form onSubmit={handleSubmit}>
-                <Input type='text' name='userId' value={userId} placeholder='userId' onChange={handleChange} />
+                {/* <Input type='text' name='userId' value={userId} placeholder='userId' onChange={handleChange} /> */}
 
                 <Input type='text' name='title' value={title} placeholder='title' onChange={handleChange} />
                 <Input type='text' name='content' value={content} placeholder='content' onChange={handleChange} />
