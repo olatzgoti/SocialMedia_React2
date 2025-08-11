@@ -5,7 +5,15 @@ En este proyecto de fullstack, se integrarán los conocimientos en las tecnolog�
 
 # Tecnologías
 
-NodeJS, Express, Mongoose, React + Vite, Redux
+NodeJS
+
+Express
+
+Mongoose
+
+React + Vite
+
+Redux
 
 # Instalación
 
@@ -17,8 +25,8 @@ El backend se encuentra en el archivo SocialMedia.
 Se proporciona un ejemplo en .env.example en la carpeta Backend. PORT, MONGO_URI, JWT_SECRET
 
 
-Frontend
-
+## Frontend
+ 
 La navegación se gestiona desde el componente TheHeader, se proporcionan las opciones de enlaces. El Usuario puede ver su perfil, las publicaciones.
 
 En el encabezado se integra la búsqueda de publicaciones, que busca publicaciones por título.
